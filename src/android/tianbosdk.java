@@ -60,7 +60,7 @@ public class tianbosdk extends CordovaPlugin {
             }
         } catch (Exception e) {
             // TODO Auto-generated catch block
-            int errstatus = e.getErrorStatus();
+            int errstatus = e.toString();
             callbackContext.error(errstatus);
             return false;
         } catch (Exception e) {
