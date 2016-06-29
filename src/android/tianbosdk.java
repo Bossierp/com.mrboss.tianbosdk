@@ -17,7 +17,7 @@
        under the License.
 */
 
-package com.mrboss.tianbosdk;
+package com.cordova.tianbosdk;
 
 import java.io.IOException;
 import java.io.OutputStream;

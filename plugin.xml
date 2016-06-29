@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-           id="com.mrboss.tianbosdk"
+           id="com.cordova.tianbosdk"
       version="0.0.1">
 
     <name>Android tianbosdk</name>
     <description>Cordova Android tianbosdk Plugin</description>
     <license>Apache 2.0</license>
     <keywords>cordova,android,tianbosdk</keywords>
-    <repo>https://github.com/Bossierp/com.mrboss.tianbosdk.git</repo>
-    <issue>https://github.com/Bossierp/com.mrboss.tianbosdk/issues</issue>
+    <repo>https://github.com/Bossierp/com.cordova.tianbosdk.git</repo>
+    <issue>https://github.com/Bossierp/com.cordova.tianbosdk/issues</issue>
 
     <js-module src="www/tianbosdk.js" name="tianbosdk">
         <merges target="cordova.tianbosdk" />
