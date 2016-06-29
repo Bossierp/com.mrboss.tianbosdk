@@ -44,7 +44,7 @@ import com.telpo.tps550.api.printer.ThermalPrinter;
 
 import java.io.*;
 
-public class jsposprinter extends CordovaPlugin {
+public class tianbosdk extends CordovaPlugin {
 
     private static final String LOG_TAG = "tianbosdkPlugin";
 
@@ -57,7 +57,7 @@ public class jsposprinter extends CordovaPlugin {
                 TianBoSdkPrint(printtext, encode, callbackContext);
                 return true;
             }
-        } catch (AposException e) {
+        } catch (Exception e) {
             // TODO Auto-generated catch block
             int errstatus = e.getErrorStatus();
             callbackContext.error(errstatus);
@@ -74,7 +74,9 @@ public class jsposprinter extends CordovaPlugin {
         TianBoSdkPrinterTask tbspt = new TianBoSdkPrinterTask();
         tbspt.printstr = printstr;
         tbspt.encode = encode;
+        tbspt.encode = encode;
         tbspt.callbackContext = callbackContext;
+        tbspt.activity = this.cordova.getActivity();
         tbspt.execute();
     }
 
@@ -82,13 +84,14 @@ public class jsposprinter extends CordovaPlugin {
         public CallbackContext callbackContext;
         public String encode = "GBK";
         public String printstr = "";
+        public Activity activity;
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected Object doInBackground(Object[] params) {
             String result = "OK";
 
             try {
-                ThermalPrinter.start(this.cordova.getActivity());
+                ThermalPrinter.start(activity);
                 ThermalPrinter.reset();
                 ThermalPrinter.addString(printstr);
                 ThermalPrinter.printString();
@@ -101,7 +104,6 @@ public class jsposprinter extends CordovaPlugin {
             } 
             finally {
                 ThermalPrinter.stop(PrinterActivity.this);
-                Log.v(TAG, "The Print Progress End !!!");
             }
             return result;
         }
@@ -116,5 +118,20 @@ public class jsposprinter extends CordovaPlugin {
                 callbackContext.error(o.toString());
             }
         }
+    }
+
+    private void Alert(String msg) {
+        Dialog alertDialog = new AlertDialog.Builder(this.cordova.getActivity()).
+        setTitle("对话框的标题").
+        setMessage(msg).
+        setCancelable(false).
+        setNegativeButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // TODO Auto-generated method stub
+            }
+        }).
+        create();
+        alertDialog.show();
     }
 }
