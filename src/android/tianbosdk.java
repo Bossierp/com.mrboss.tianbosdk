@@ -35,6 +35,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import android.os.AsyncTask;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Context;
@@ -100,10 +101,10 @@ public class tianbosdk extends CordovaPlugin {
             }
             catch (Exception e) {
                 e.printStackTrace();
-                result = e.getMessage();
+                result = e.toString();
             } 
             finally {
-                ThermalPrinter.stop(PrinterActivity.this);
+                ThermalPrinter.stop(activity);
             }
             return result;
         }
