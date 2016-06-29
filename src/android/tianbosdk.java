@@ -106,7 +106,7 @@ public class tianbosdk extends CordovaPlugin {
 
         @Override
         protected void onPostExecute(Object o) {
-            Alert(o.toString() + "");
+            //Alert(o.toString() + "");
             if (o.toString() == "OK") {
                 callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, o.toString()));
                 callbackContext.success();
