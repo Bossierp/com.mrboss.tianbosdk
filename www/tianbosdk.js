@@ -36,8 +36,7 @@ module.exports = {
      */
     TianBoSdkPrint: function(printstr, encode, successCallback, errorCallback) {
         exec(successCallback, errorCallback, 'tianbosdk', 'TianBoSdkPrint', [printstr, encode, successCallback, errorCallback]);
-    }
-    
+    },
     TianBoSdkOpenMoneyBox: function(successCallback, errorCallback) {
         exec(successCallback, errorCallback, 'tianbosdk', 'TianBoSdkOpenMoneyBox', [successCallback, errorCallback]);
     }
