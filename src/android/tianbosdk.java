@@ -42,6 +42,8 @@ import android.content.Context;
 import android.app.AlertDialog;
 
 import com.telpo.tps550.api.printer.ThermalPrinter;
+import com.telpo.tps550.api.moneybox.MoneyBox;
+import com.telpo.tps550.api.TelpoErrorCode;
 
 import java.io.*;
 
@@ -58,12 +60,33 @@ public class tianbosdk extends CordovaPlugin {
                 TianBoSdkPrint(printtext, encode, callbackContext);
                 return true;
             }
+            else if("TianBoSdkOpenMoneyBox".equals(action)){
+                TianBoSdkOpenMoneyBox(callbackContext);
+                return true;
+            }
         } catch (Exception e) {
             callbackContext.error(e.getMessage());
             return false;
         }
         callbackContext.error("No This Method");
         return false;
+    }
+
+    public void TianBoSdkOpenMoneyBox(CallbackContext callbackContext) {
+        if (MoneyBox.open() == TelpoErrorCode.ERR_LOW_POWER) {
+            //the battery is low,Please connect the charger
+            callbackContext.error("电池电量低，请连接充电器！");
+            return;
+        }
+        try {
+            Thread.sleep(500);
+            MoneyBox.close();
+            callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, "OK"));
+            callbackContext.success();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            callbackContext.error(e.toString());
+        }
     }
 
     public void TianBoSdkPrint(String printstr, String encode, CallbackContext callbackContext) {
