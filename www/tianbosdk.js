@@ -34,8 +34,8 @@ module.exports = {
      * @param {Function} completeCallback   The callback that is called when user clicks on a button.
      * @param {Function} completeCallback   The callback that is called when user clicks on a button.
      */
-    TianBoSdkPrint: function(printstr, encode, successCallback, errorCallback) {
-        exec(successCallback, errorCallback, 'tianbosdk', 'TianBoSdkPrint', [printstr, encode, successCallback, errorCallback]);
+    TianBoSdkPrint: function(printstr, encode, graylevel, successCallback, errorCallback) {
+        exec(successCallback, errorCallback, 'tianbosdk', 'TianBoSdkPrint', [printstr, encode, graylevel, successCallback, errorCallback]);
     },
     TianBoSdkOpenMoneyBox: function(successCallback, errorCallback) {
         exec(successCallback, errorCallback, 'tianbosdk', 'TianBoSdkOpenMoneyBox', [successCallback, errorCallback]);

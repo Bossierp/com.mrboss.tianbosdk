@@ -57,7 +57,8 @@ public class tianbosdk extends CordovaPlugin {
             if ("TianBoSdkPrint".equals(action)) {
                 String printtext = args.getString(0);
                 String encode = args.getString(1);
-                TianBoSdkPrint(printtext, encode, callbackContext);
+                int graylevel = args.getInt(2);
+                TianBoSdkPrint(printtext, encode, graylevel, callbackContext);
                 return true;
             }
             else if("TianBoSdkOpenMoneyBox".equals(action)){
@@ -89,11 +90,11 @@ public class tianbosdk extends CordovaPlugin {
         }
     }
 
-    public void TianBoSdkPrint(String printstr, String encode, CallbackContext callbackContext) {
+    public void TianBoSdkPrint(String printstr, String encode, int graylevel, CallbackContext callbackContext) {
         TianBoSdkPrinterTask tbspt = new TianBoSdkPrinterTask();
         tbspt.printstr = printstr;
         tbspt.encode = encode;
-        tbspt.encode = encode;
+        tbspt.graylevel = graylevel;
         tbspt.callbackContext = callbackContext;
         tbspt.activity = this.cordova.getActivity();
         tbspt.execute();
@@ -103,6 +104,7 @@ public class tianbosdk extends CordovaPlugin {
         public CallbackContext callbackContext;
         public String encode = "GBK";
         public String printstr = "";
+        public int graylevel = 4;
         public Activity activity;
         // onPostExecute displays the results of the AsyncTask.
         @Override
@@ -112,6 +114,7 @@ public class tianbosdk extends CordovaPlugin {
             try {
                 ThermalPrinter.start(activity);
                 ThermalPrinter.reset();
+                ThermalPrinter.setGray(graylevel);
                 ThermalPrinter.addString(printstr);
                 ThermalPrinter.printString();
                 ThermalPrinter.clearString();
